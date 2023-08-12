@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+}
+@property --rotate {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.canvas-wrapper {
+    width: 600px;
+    height: 600px;
+    position: relative;
+}
+
+.canvas-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2%;
+    left: -2%;
+    width: 104%;
+    height: 104%;
+    background: linear-gradient(var(--rotate), #a3c3d9 30%, #4d194d 50%, #80ffdb 70%);
+    border-radius: 150px;
+    animation: spin 5s ease infinite, scale 2s ease infinite alternate;
+    filter: blur(20px);
+}
+.canvas-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -1%;
+    left: -1%;
+    width: 102%;
+    height: 102%;
+    background: linear-gradient(var(--rotate), #a3c3d9 30%, #4d194d 50%, #80ffdb 70%);
+    border-radius: 150px;
+    animation: spin 5s ease infinite;
+    z-index: -1;
+}
+#canvas {
+    display: block;
+    background-color: #333;
+    margin: auto;
+    border-radius: 150px;
+    position: absolute;
+    width: 100%;
+}
+
+@keyframes spin {
+    from {
+        --rotate: 0deg;
+    }
+    to {
+        --rotate: 360deg;
+    }
+}
+@keyframes scale {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .canvas-wrapper {
+        width: 500px;
+        height: 500px;
+    }
+
+    .canvas-wrapper::after,
+    .canvas-wrapper::before,
+    #canvas {
+        border-radius: 130px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .canvas-wrapper {
+        width: 350px;
+        height: 350px;
+    }
+
+    .canvas-wrapper::after,
+    .canvas-wrapper::before,
+    #canvas {
+        border-radius: 120px;
+    }
+}
